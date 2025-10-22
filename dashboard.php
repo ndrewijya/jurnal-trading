@@ -1,12 +1,11 @@
 <?php
-// File: dashboard.php (FINAL CLEAN)
 require_once 'core/auth.php';
 require_once 'config/database.php';
 require_once 'templates/header.php'; // Memuat header
 
 $current_user_id = $_SESSION['user_id'];
 
-// --- LOGIKA STATISTIK (Tidak berubah) ---
+// --- LOGIKA STATISTIK ---
 $stmt_total = mysqli_prepare($koneksi, "SELECT COUNT(id) as total FROM trades WHERE user_id = ?");
 mysqli_stmt_bind_param($stmt_total, "i", $current_user_id);
 mysqli_stmt_execute($stmt_total);
@@ -34,7 +33,7 @@ while ($trade = mysqli_fetch_assoc($result_streaks)) {
     }
 }
 
-// --- LOGIKA PENCARIAN (Tidak berubah) ---
+// --- LOGIKA PENCARIAN  ---
 $search_term = $_GET['search'] ?? '';
 if (!empty($search_term)) {
     $query = "SELECT * FROM trades WHERE user_id = ? AND currency_pair LIKE ? ORDER BY id DESC";

@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-// PERUBAHAN DI SINI
+
 require_once 'templates/header_auth.php'; // Muat header auth
 ?>
 

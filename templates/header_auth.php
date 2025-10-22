@@ -1,5 +1,4 @@
 <?php
-// File: templates/header_auth.php (BARU)
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

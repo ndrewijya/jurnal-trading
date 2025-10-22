@@ -1,5 +1,4 @@
 <?php
-// File: templates/footer_auth.php (BARU)
 ?>
     <footer class="footer">
         <p>

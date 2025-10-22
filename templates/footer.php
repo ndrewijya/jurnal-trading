@@ -1,5 +1,4 @@
 <?php
-// File: templates/footer.php (FINAL + Tombol Scroll)
 ?>
 
     <footer class="footer">
@@ -14,7 +13,6 @@
     </div>
 
     <script>
-        // Ambil elemen-elemen yang kita butuhkan
         const scroller = document.querySelector('.container'); // PENTING: Target kita adalah .container
         const topBtn = document.getElementById('scrollToTopBtn');
         const bottomBtn = document.getElementById('scrollToBottomBtn');

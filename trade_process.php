@@ -2,10 +2,10 @@
 require_once 'core/auth.php';
 require_once 'config/database.php';
 
-// PROSES CREATE & UPDATE (METHOD POST)
+// PROSES CREATE & UPDATE
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
-    // Aksi CREATE (tidak berubah)
+    // Aksi CREATE
     if (isset($_POST['action']) && $_POST['action'] === 'create') {
         $user_id = $_SESSION['user_id'];
         $entry_price = $_POST['entry_price'];
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
     
-    // Aksi UPDATE (BAGIAN YANG DIPERBARUI)
+    // Aksi UPDATE
     } elseif (isset($_POST['action']) && $_POST['action'] === 'update') {
         $user_id = $_SESSION['user_id'];
         $hasil = $_POST['hasil'];
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// PROSES DELETE (METHOD GET)
+// PROSES DELETE 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'delete') {
     $user_id = $_SESSION['user_id'];
     $trade_id = $_GET['id'];
