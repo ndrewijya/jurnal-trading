@@ -264,6 +264,40 @@ textarea {
     font-size: 0.9em;
     font-weight: bold;
 }
+
+/* 9. Tombol Scroll ke Atas/Bawah */
+.scroll-button-container {
+    position: fixed;
+    bottom: 80px; /* Beri jarak 80px dari bawah (di atas footer) */
+    right: 20px;
+    z-index: 1001; /* Tampil di atas segalanya */
+    display: flex;
+    flex-direction: column; /* Susun tombol ke atas-bawah */
+    gap: 10px; /* Jarak antar tombol */
+}
+
+.scroll-button-container button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; /* Membuatnya bulat */
+    border: none;
+    background-color: #555; /* Warna abu-abu gelap */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.scroll-button-container button:hover {
+    opacity: 1; /* Terlihat jelas saat disorot */
+}
+
+/* Sembunyikan tombol "Ke Atas" secara default */
+#scrollToTopBtn {
+    display: none;
+}
 .status-badge.tp { background-color: green; }
 .status-badge.sl { background-color: red; }
 .status-badge.pending { background-color: #6c757d; }
