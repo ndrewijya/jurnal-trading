@@ -36,10 +36,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-require_once 'templates/header.php'; // Muat header
+// PERUBAHAN DI SINI
+require_once 'templates/header_auth.php'; // Muat header auth
 ?>
 
-<div class="container auth-container"> <div class="auth-box">
+<div class="container auth-container">
+    <div class="auth-box">
         <h2>Login Jurnal Trading</h2>
         
         <?php if (!empty($error)): ?><p class="message message-error"><?php echo $error; ?></p><?php endif; ?>
@@ -62,4 +64,7 @@ require_once 'templates/header.php'; // Muat header
     </div>
 </div>
 
-<?php require_once 'templates/footer.php'; // Muat footer ?>
+<?php
+// PERUBAHAN DI SINI
+require_once 'templates/footer_auth.php'; // Muat footer auth
+?>

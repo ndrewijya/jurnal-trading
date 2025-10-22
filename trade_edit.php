@@ -20,34 +20,33 @@ if (!$trade) {
 ?>
 
 <div class="container">
-    <h3>Update Hasil Trade</h3>
-    <hr style="margin: 20px 0;">
+    <div class="form-card">
+        <h3>Update Hasil Trade</h3>
 
-    <form action="trade_process.php" method="POST" style="max-width: 600px;">
-        <input type="hidden" name="action" value="update">
-        <input type="hidden" name="trade_id" value="<?php echo $trade['id']; ?>">
+        <form action="trade_process.php" method="POST">
+            <input type="hidden" name="action" value="update">
+            <input type="hidden" name="trade_id" value="<?php echo $trade['id']; ?>">
 
-        <p><strong>Pasangan Mata Uang:</strong> <?php echo htmlspecialchars($trade['currency_pair']); ?></p>
-        <p><strong>Entry Price:</strong> <?php echo (float)$trade['entry_price']; ?></p>
-        
-        <div class="form-group">
-            <label for="hasil">Hasil Trade</label>
-            <select id="hasil" name="hasil" required>
-                <option value="Pending" <?php if ($trade['hasil'] == 'Pending') echo 'selected'; ?>>Pending</option>
-                <option value="TP" <?php if ($trade['hasil'] == 'TP') echo 'selected'; ?>>Take Profit (TP)</option>
-                <option value="SL" <?php if ($trade['hasil'] == 'SL') echo 'selected'; ?>>Stop Loss (SL)</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="profit_loss">Profit / Loss (isi jika TP atau SL)</label>
-            <input type="text" id="profit_loss" inputmode="decimal" name="profit_loss" value="<?php echo (float)$trade['profit_loss']; ?>" placeholder="Contoh: 250.50">
-        </div>
-        <div class="form-group">
-            <label for="notes">Catatan</label>
-            <textarea id="notes" name="notes"><?php echo htmlspecialchars($trade['notes']); ?></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width: auto;">Update Hasil</button>
-    </form>
-</div>
+            <p><strong>Pasangan Mata Uang:</strong> <?php echo htmlspecialchars($trade['currency_pair']); ?></p>
+            <p><strong>Entry Price:</strong> <?php echo (float)$trade['entry_price']; ?></p>
+            
+            <div class="form-group">
+                <label for="hasil">Hasil Trade</label>
+                <select id="hasil" name="hasil" required>
+                    <option value="Pending" <?php if ($trade['hasil'] == 'Pending') echo 'selected'; ?>>Pending</option>
+                    <option value="TP" <?php if ($trade['hasil'] == 'TP') echo 'selected'; ?>>Take Profit (TP)</option>
+                    <option value="SL" <?php if ($trade['hasil'] == 'SL') echo 'selected'; ?>>Stop Loss (SL)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="profit_loss">Profit / Loss (isi jika TP atau SL)</label>
+                <input type="text" id="profit_loss" inputmode="decimal" name="profit_loss" value="<?php echo (float)$trade['profit_loss']; ?>" placeholder="Contoh: 250.50">
+            </div>
+            <div class="form-group">
+                <label for="notes">Catatan</label>
+                <textarea id="notes" name="notes"><?php echo htmlspecialchars($trade['notes']); ?></textarea>
+            </div>
 
-<?php require_once 'templates/footer.php'; // Muat footer ?>
+            <button type="submit" class="btn btn-primary">Update Hasil</button>
+        </form>
+    </div> </div> <?php require_once 'templates/footer.php'; // Muat footer ?>

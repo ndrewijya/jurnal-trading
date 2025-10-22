@@ -1,5 +1,5 @@
 <?php
-// File: templates/header.php (FINAL)
+// File: templates/header.php (FINAL V2)
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -18,7 +18,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <a href="trade_add.php">Tambah Trade</a>
         <div class="right">
             <?php if (isset($_SESSION['username'])): ?>
-                <a href="#">Halo, <?php echo htmlspecialchars($_SESSION['username']); ?></a>
+                <span class="navbar-user">Halo, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
                 <a href="logout.php">Logout</a>
             <?php endif; ?>
         </div>
