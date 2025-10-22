@@ -5,7 +5,7 @@ require_once 'templates/header.php';
 
 $current_user_id = $_SESSION['user_id'];
 
-//  LOGIKA STATISTIK DASHBOARD
+// --- LOGIKA STATISTIK DASHBOARD (tidak berubah, tetap menghitung total) ---
 $stmt_total = mysqli_prepare($koneksi, "SELECT COUNT(id) as total FROM trades WHERE user_id = ?");
 mysqli_stmt_bind_param($stmt_total, "i", $current_user_id);
 mysqli_stmt_execute($stmt_total);
@@ -36,12 +36,27 @@ while ($trade = mysqli_fetch_assoc($result_streaks)) {
         if ($current_loss_streak > $max_loss_streak) $max_loss_streak = $current_loss_streak;
     }
 }
+// --- LOGIKA STATISTIK SELESAI ---
 
-$query = "SELECT * FROM trades WHERE user_id = ? ORDER BY id DESC";
-$stmt = mysqli_prepare($koneksi, $query);
-mysqli_stmt_bind_param($stmt, "i", $current_user_id);
+// --- LOGIKA PENCARIAN UNTUK TABEL DIMULAI ---
+$search_term = $_GET['search'] ?? ''; // Ambil kata kunci pencarian
+
+if (!empty($search_term)) {
+    // Jika ada pencarian, modifikasi query untuk tabel
+    $query = "SELECT * FROM trades WHERE user_id = ? AND currency_pair LIKE ? ORDER BY id DESC";
+    $stmt = mysqli_prepare($koneksi, $query);
+    $search_like = "%" . $search_term . "%"; // Tambahkan wildcard
+    mysqli_stmt_bind_param($stmt, "is", $current_user_id, $search_like);
+} else {
+    // Query default jika tidak ada pencarian
+    $query = "SELECT * FROM trades WHERE user_id = ? ORDER BY id DESC";
+    $stmt = mysqli_prepare($koneksi, $query);
+    mysqli_stmt_bind_param($stmt, "i", $current_user_id);
+}
+
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
+// --- LOGIKA PENCARIAN SELESAI ---
 ?>
 
 <div class="welcome-msg" style="margin-bottom: 20px;">
@@ -51,9 +66,7 @@ $result = mysqli_stmt_get_result($stmt);
 <div class="stats-container" style="display: flex; gap: 20px; margin-bottom: 40px; flex-wrap: wrap;">
     <div class="stat-card" style="flex: 1; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); min-width: 200px;">
         <h4 style="margin-top: 0;">Total Net Profit</h4>
-        <p style="font-size: 24px; font-weight: bold; color: <?php echo ($total_pl >= 0) ? 'green' : 'red'; ?>;">
-            <?php echo number_format($total_pl ?? 0, 2); ?>
-        </p>
+        <p style="font-size: 24px; font-weight: bold; color: <?php echo ($total_pl >= 0) ? 'green' : 'red'; ?>;"><?php echo number_format($total_pl ?? 0, 2); ?></p>
     </div>
     <div class="stat-card" style="flex: 1; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); min-width: 200px;">
         <h4 style="margin-top: 0;">Total Trade</h4>
@@ -72,7 +85,20 @@ $result = mysqli_stmt_get_result($stmt);
         <p style="font-size: 24px; font-weight: bold; color: red;"><?php echo $max_loss_streak; ?> Kali</p>
     </div>
 </div>
+
 <hr style="margin-bottom: 40px;">
+
+<div class="search-container" style="margin-bottom: 20px;">
+    <form action="dashboard.php" method="GET">
+        <label for="search" style="font-weight: bold;">Cari Pasangan Mata Uang:</label>
+        <input type="text" id="search" name="search" placeholder="Contoh: EUR/USD" 
+               style="padding: 8px; width: 250px;" 
+               value="<?php echo htmlspecialchars($search_term); ?>">
+        <button type="submit" style="padding: 9px 15px; cursor: pointer;">Cari</button>
+        <a href="dashboard.php" style="padding: 9px 15px; text-decoration: none; background-color: #6c757d; color: white; border-radius: 4px; font-size: 0.9em; margin-left: 5px;">Reset</a>
+    </form>
+</div>
+
 <div class="welcome-msg" style="margin-bottom: 20px;">
     <h2>Riwayat Trading Anda</h2>
 </div>
@@ -93,9 +119,7 @@ $result = mysqli_stmt_get_result($stmt);
     </thead>
     <tbody>
         <?php if (mysqli_num_rows($result) > 0): ?>
-            <?php 
-            $nomor = 1; 
-            ?>
+            <?php $nomor = 1; ?>
             <?php while ($trade = mysqli_fetch_assoc($result)): ?>
                 <?php
                     $hasil_color = 'blue';
@@ -119,7 +143,15 @@ $result = mysqli_stmt_get_result($stmt);
                 </tr>
             <?php endwhile; ?>
         <?php else: ?>
-            <tr><td colspan="10" style="text-align: center; padding: 20px;">Anda belum memiliki catatan trade.</td></tr>
+            <tr>
+                <td colspan="10" style="text-align: center; padding: 20px;">
+                    <?php if (!empty($search_term)): ?>
+                        Tidak ada trade yang ditemukan untuk "<?php echo htmlspecialchars($search_term); ?>".
+                    <?php else: ?>
+                        Anda belum memiliki catatan trade.
+                    <?php endif; ?>
+                </td>
+            </tr>
         <?php endif; ?>
     </tbody>
 </table>
