@@ -1,0 +1,269 @@
+/* File: assets/css/style.css (FINAL) */
+
+/* 1. Pengaturan Dasar & Tata Letak Utama */
+html {
+    box-sizing: border-box;
+    height: 100%;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    /* Tata letak fleksibel untuk header/footer terkunci */
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Set tinggi body 100% dari layar */
+    overflow: hidden; /* Sembunyikan scrollbar utama body */
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* 2. Header / Navbar (Terkunci di Atas) */
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    width: 100%;
+    z-index: 1000;
+    flex-shrink: 0; /* Mencegah header menyusut */
+}
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+.navbar a:hover {
+    background-color: #555;
+    color: white;
+    text-decoration: none;
+}
+.navbar .right {
+    float: right;
+}
+
+/* 3. Kontainer Konten (Bagian Tengah yang Bisa Scroll) */
+.container {
+    width: 100%;
+    max-width: 1600px; /* Batasi lebar agar tidak terlalu lebar di layar besar */
+    margin: 0 auto;
+    padding: 20px;
+    /* KUNCI: Mengisi sisa ruang & menyediakan scrollbar-nya sendiri */
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* 4. Footer (Terkunci di Bawah) */
+.footer {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #ddd;
+    font-size: 0.9em;
+    color: #777;
+    background-color: #f9f9f9;
+    width: 100%;
+    z-index: 1000;
+    flex-shrink: 0; /* Mencegah footer menyusut */
+}
+.footer p {
+    margin: 0;
+}
+
+/* 5. Halaman Login & Registrasi */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.auth-box {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 350px;
+}
+.auth-box h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+.form-group {
+    margin-bottom: 1.25rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+/* Input Form Global */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+/* Tombol Global */
+.btn {
+    display: inline-block;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+.btn-full {
+    width: 100%;
+}
+.btn-primary {
+    background-color: #007bff;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+.btn-register {
+    background-color: #28a745;
+}
+.btn-register:hover {
+    background-color: #218838;
+}
+.btn-reset {
+    background-color: #6c757d;
+    font-size: 0.9em;
+    padding: 9px 15px;
+    margin-left: 5px;
+}
+.auth-link {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+.message {
+    text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+.message-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+.message-success {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+/* 6. Dashboard - Kartu Statistik */
+.stats-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+.stat-card {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    min-width: 200px;
+}
+.stat-card h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #555;
+}
+.stat-card .stat-number {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+.stat-number.profit { color: green; }
+.stat-number.loss { color: red; }
+.stat-number.neutral { color: #333; }
+.stat-number.blue { color: #007bff; }
+
+/* 7. Dashboard - Pencarian */
+.search-container {
+    margin-bottom: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.search-container label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+.search-container input[type="text"] {
+    width: 250px;
+}
+
+/* 8. Dashboard - Tabel (KUNCI PERMINTAAN ANDA) */
+.table-wrapper {
+    /* KUNCI: Tentukan tinggi spesifik dan buat scroll */
+    max-height: 500px; /* Anda bisa ubah ini, misal 400px, 600px */
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: white;
+}
+.main-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.main-table th, .main-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap; /* Mencegah teks turun baris */
+}
+.main-table th {
+    /* KUNCI: Header tabel lengket */
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    z-index: 10;
+}
+.main-table tr:last-child td {
+    border-bottom: none;
+}
+.main-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+.status-badge {
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+.status-badge.tp { background-color: green; }
+.status-badge.sl { background-color: red; }
+.status-badge.pending { background-color: #6c757d; }
