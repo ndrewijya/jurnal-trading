@@ -79,15 +79,19 @@ $result = mysqli_stmt_get_result($stmt);
         </div>
     </div>
 
-    <div class="search-container">
-        <form action="dashboard.php" method="GET">
-            <label for="search">Cari Pasangan Mata Uang:</label>
-            <input type="text" id="search" name="search" placeholder="Contoh: EUR/USD" value="<?php echo htmlspecialchars($search_term); ?>">
+    <div class="search-container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        
+        <form action="dashboard.php" method="GET" style="display: flex; align-items: center;">
+            <label for="search" style="margin-right: 10px;">Cari:</label>
+            <input type="text" id="search" name="search" placeholder="Contoh: EUR/USD" value="<?php echo htmlspecialchars($search_term); ?>" style="margin-right: 5px;">
             <button type="submit" class="btn btn-primary">Cari</button>
             <a href="dashboard.php" class="btn btn-reset">Reset</a>
         </form>
-    </div>
 
+        <a href="cetak.php" target="_blank" class="btn" style="background-color: #e67e22; color: white; text-decoration: none; padding: 10px 20px; margin-left: auto;">
+            🖨️ Cetak Rekapan
+        </a>
+    </div>
     <div class="welcome-msg" style="margin-top: 40px;">
         <h2>Riwayat Trading Anda</h2>
     </div>
